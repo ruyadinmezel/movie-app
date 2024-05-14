@@ -5,15 +5,15 @@ import React from "react";
 const MovieCard = (props) => {
   return (
     <div>
-      <Grid container spacing={0.5} sx={{ ml: 2.5 }}>
+      <Grid container spacing={0.5} sx={{ ml: 1, mt: 2 }}>
         {props.movies.map((movie, index) => (
           <div>
             <Grid item xs>
               <Card
                 sx={{
-                  m: 2,
-                  width: 320,
-                  height: 550,
+                  m: 1,
+                  width: 340,
+                  height: 620,
                 }}
                 alignItems="flex-start"
               >
@@ -22,8 +22,8 @@ const MovieCard = (props) => {
                   image={movie.Poster}
                   alt="poster"
                   sx={{
-                    width: 320,
-                    height: 400,
+                    width: 340,
+                    height: 500,
                   }}
                 />
                 <CardContent sx={{ justifyContent: "center" }}>

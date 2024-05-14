@@ -22,101 +22,49 @@ import MovieCard from "./components/MovieCard";
 function App() {
   const [type, setType] = useState("All");
   const [searchText, setSearchText] = useState("Pokemon");
-  const [movies, setMovies] = useState([
-    {
-      Title: "Pokémon: Detective Pikachu",
-      Year: "2019",
-      imdbID: "tt5884052",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMDkxNzRmNDYtMDY0OS00N2JhLTkzZWUtMWE3MzZkNDk1MmJiXkEyXkFqcGdeQXVyNTA3MTU2MjE@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon",
-      Year: "1997–2023",
-      imdbID: "tt0168366",
-      Type: "series",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BNDcwZDc2NTEtMzU0Ni00YTQyLWIyYTQtNTI3YjM0MzhmMmI4XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon: The First Movie - Mewtwo Strikes Back",
-      Year: "1998",
-      imdbID: "tt0190641",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BZGM3MjQ3NTQtNzRiZi00MDUzLWFjYjEtZWJjMjUwYzExYjRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon the Movie 2000",
-      Year: "1999",
-      imdbID: "tt0210234",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BNzE1NjBiODAtNDVhNS00ZTI1LTg4ZjUtZTk3OWVhODljMjNjXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon 3 the Movie: Spell of the Unown",
-      Year: "2000",
-      imdbID: "tt0235679",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMTk0NzM3MDY1OV5BMl5BanBnXkFtZTYwNTkwODc5._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokemon 4Ever: Celebi - Voice of the Forest",
-      Year: "2001",
-      imdbID: "tt0287635",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BZDZiYjc3MWYtODE5Mi00MDM5LWFkZTAtNjAzZmUxMzc4ZGQxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon the Movie: I Choose You!",
-      Year: "2017",
-      imdbID: "tt6595896",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BM2U3NmI4YzItYmRiNi00M2UxLWExNTYtNDZkZmJlNzlmM2M3XkEyXkFqcGdeQXVyNDkzMjE0NDE@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon Heroes",
-      Year: "2002",
-      imdbID: "tt0347791",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BODg3OTljOTktNmI3Ny00MDczLTk2NGItNWRiOTE2YjQ1OWI0XkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon: Mewtwo Strikes Back - Evolution",
-      Year: "2019",
-      imdbID: "tt8856470",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BYTlmMjc0YzgtMDlmYy00NGY4LTgyOTAtODI2MzllNWI1ODBkXkEyXkFqcGdeQXVyMTMxNDQyNjM5._V1_SX300.jpg",
-    },
-    {
-      Title: "Pokémon: Lucario and the Mystery of Mew",
-      Year: "2005",
-      imdbID: "tt0875609",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMTUxOTcwNjAwMl5BMl5BanBnXkFtZTgwMjc2MzQ2NjE@._V1_SX300.jpg",
-    },
-  ]);
+  const [searchTextChange, setSearchTextChange] = useState("Pokemon");
+  const [movies, setMovies] = useState([]);
 
-  const getMovies = async () => {
-    const url = "http://www.omdbapi.com/?s=pokemon&apikey=7338b124";
-    const responseJson = await fetch(url);
-    console.log(responseJson);
+  const getMovies = async (searchText, type) => {
+    if (type !== "All") {
+      const url = `http://www.omdbapi.com/?s=${searchText}&type=${type}&apikey=7338b124`;
+      const response = await fetch(url);
+      const responseJson = await response.json();
+
+      if (responseJson.Search) {
+        setMovies(responseJson.Search);
+      }
+      console.log(responseJson);
+    } else {
+      const url = `http://www.omdbapi.com/?s=${searchText}&apikey=7338b124`;
+      const response = await fetch(url);
+
+      const responseJson = await response.json();
+
+      if (responseJson.Search) {
+        setMovies(responseJson.Search);
+      }
+      console.log(responseJson);
+    }
   };
 
   useEffect(() => {
-    getMovies();
-  });
+    getMovies(searchText, type);
+  }, [searchText, type]);
 
-  const handleChange = (event) => {
+  const handleChangeType = (event) => {
     setType(event.target.value);
+    console.log(event.target.value);
+  };
+  const handleChangeSearchText = (event) => {
+    setSearchTextChange(event.target.value);
+    console.log(event.target.value);
+  };
+  const handleSearchButton = (event) => {
+    setSearchText(searchTextChange);
+
+    console.log(event.target.value);
+    getMovies(searchText, type);
   };
 
   return (
@@ -132,24 +80,25 @@ function App() {
 
             <Select
               variant="standard"
-              sx={{ mb: 1 }}
+              sx={{ mb: 0, mr: 1 }}
               value={type}
               label={type}
-              onChange={handleChange}
+              onChange={handleChangeType}
             >
-              <MenuItem value={10}>All</MenuItem>
-              <MenuItem value={20}>Movies</MenuItem>
-              <MenuItem value={30}>TV Series</MenuItem>
-              <MenuItem value={40}>TV Series Episodes</MenuItem>
+              <MenuItem value={"All"}>All</MenuItem>
+              <MenuItem value={"movie"}>Movies</MenuItem>
+              <MenuItem value={"series"}>TV Series</MenuItem>
+              <MenuItem value={"episode"}>TV Series Episodes</MenuItem>
             </Select>
 
             <TextField
               label="Search"
               variant="standard"
-              value={searchText}
-              sx={{ ml: 1, mb: 1 }}
+              value={searchTextChange}
+              sx={{ ml: 1, mb: 2 }}
+              onChange={handleChangeSearchText}
             />
-            <Button sx={{ m: 1 }}>
+            <Button sx={{ m: 1 }} onClick={handleSearchButton}>
               <SearchIcon sx={{ color: "white" }} />
             </Button>
           </Toolbar>
