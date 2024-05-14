@@ -1,4 +1,3 @@
-import { CenterFocusStrong } from "@mui/icons-material";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 
@@ -27,6 +26,7 @@ const MovieCard = (props) => {
                   }}
                 />
                 <CardContent sx={{ justifyContent: "center" }}>
+                  {/* //sx={{ fontFamily: "roboto" }} */}
                   <Typography>{movie.Title}</Typography>
                   <Typography>{movie.Year}</Typography>
                   <Typography>ImdbID:{movie.imdbID}</Typography>

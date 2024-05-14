@@ -22,11 +22,11 @@ function App() {
   const [searchTextChange, setSearchTextChange] = useState("Pokemon");
   const [movies, setMovies] = useState([]);
   const years = [];
-  for (let year = 1920; year <= 2024; year++) {
+  for (let year = 2024; year >= 1920; year--) {
     years.push(year);
   }
 
-  const getMovies = async (searchText, type) => {
+  const getMovies = async (searchText, typ, year) => {
     var urltext = searchText;
     if (type !== "All") {
       urltext = urltext + "&type=" + type;
@@ -35,7 +35,7 @@ function App() {
       urltext = urltext + "&y=" + year;
     }
 
-    const url = `http://www.omdbapi.com/?s=${urltext}&apikey=7338b124`;
+    const url = `https://www.omdbapi.com/?s=${urltext}&apikey=7338b124`;
     const response = await fetch(url);
 
     const responseJson = await response.json();
@@ -47,8 +47,8 @@ function App() {
   };
 
   useEffect(() => {
-    getMovies(searchText, type);
-  }, [searchText, type]);
+    getMovies(searchText, type, year);
+  }, [searchText, type, year]);
 
   const handleChangeYear = (event) => {
     setYear(event.target.value);
