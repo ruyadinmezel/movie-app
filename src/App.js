@@ -75,15 +75,19 @@ function App() {
       <Box>
         <AppBar position="static" style={{ background: deepPurple[600] }}>
           <Toolbar sx={{ mt: 2 }}>
-            <MovieIcon sx={{ mr: 2 }}></MovieIcon>
+            <MovieIcon sx={{ mr: 2, width: "2%" }}></MovieIcon>
 
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, width: "15%" }}
+            >
               MovieHub
             </Typography>
 
             <Select
               variant="standard"
-              sx={{ mb: 0, mr: 1 }}
+              sx={{ mb: 0, mr: 1, width: "7%" }}
               value={year}
               label={year}
               onChange={handleChangeYear}
@@ -96,7 +100,7 @@ function App() {
 
             <Select
               variant="standard"
-              sx={{ mb: 0, mr: 1 }}
+              sx={{ mb: 0, mr: 1, width: "9%" }}
               value={type}
               label={type}
               onChange={handleChangeType}
@@ -111,10 +115,10 @@ function App() {
               label="Search"
               variant="standard"
               value={searchTextChange}
-              sx={{ ml: 1, mb: 2 }}
+              sx={{ ml: 1, mb: 2, width: "12%" }}
               onChange={handleChangeSearchText}
             />
-            <Button sx={{ m: 1 }} onClick={handleSearchButton}>
+            <Button sx={{ m: 1, width: "2%" }} onClick={handleSearchButton}>
               <SearchIcon sx={{ color: "white" }} />
             </Button>
           </Toolbar>
