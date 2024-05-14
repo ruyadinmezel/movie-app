@@ -2,6 +2,7 @@ import {
   AppBar,
   Box,
   Button,
+  Card,
   MenuItem,
   Select,
   TextField,
@@ -9,16 +10,17 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { deepPurple } from "@mui/material/colors";
+import { deepPurple, indigo } from "@mui/material/colors";
 import MovieIcon from "@mui/icons-material/Movie";
 import SearchIcon from "@mui/icons-material/Search";
 
 import InputLabel from "@mui/material/InputLabel";
 
 import FormControl from "@mui/material/FormControl";
+import MovieCard from "./components/MovieCard";
 
 function App() {
-  const [type, setType] = useState("");
+  const [type, setType] = useState("All");
   const [searchText, setSearchText] = useState("Pokemon");
   const [movies, setMovies] = useState([
     {
@@ -120,41 +122,40 @@ function App() {
   return (
     <div className="App">
       <Box>
-        <AppBar position="static" style={{ background: deepPurple[400] }}>
-          <Toolbar>
+        <AppBar position="static" style={{ background: deepPurple[600] }}>
+          <Toolbar sx={{ mt: 2 }}>
             <MovieIcon sx={{ mr: 2 }}></MovieIcon>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               MovieHub
             </Typography>
+
+            <Select
+              variant="standard"
+              sx={{ mb: 1 }}
+              value={type}
+              label={type}
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>All</MenuItem>
+              <MenuItem value={20}>Movies</MenuItem>
+              <MenuItem value={30}>TV Series</MenuItem>
+              <MenuItem value={40}>TV Series Episodes</MenuItem>
+            </Select>
+
             <TextField
               label="Search"
               variant="standard"
               value={searchText}
-              sx={{ mb: 2 }}
+              sx={{ ml: 1, mb: 1 }}
             />
-            <FormControl sx={{ m: 1, mr: 0, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small-label">Type</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={type}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>All</MenuItem>
-                <MenuItem value={20}>Movies</MenuItem>
-                <MenuItem value={30}>TV Series</MenuItem>
-                <MenuItem value={40}>TV Series Episodes</MenuItem>
-              </Select>
-            </FormControl>
-
             <Button sx={{ m: 1 }}>
               <SearchIcon sx={{ color: "white" }} />
             </Button>
           </Toolbar>
         </AppBar>
       </Box>
+      <MovieCard movies={movies}></MovieCard>
     </div>
   );
 }
