@@ -23,13 +23,14 @@ const MovieCard = (props) => {
               />
               <CardContent sx={{ height: "25%", m: 1 }}>
                 {/* //sx={{ fontFamily: "roboto" }} */}
-                <Typography sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold", fontSize: 16 }}>
                   {movie.Title}
                 </Typography>
-                <Typography sx={{ fontStyle: "italic" }}>
+                <Typography sx={{ fontStyle: "italic", fontSize: 16 }}>
                   {movie.Year}
                 </Typography>
-                <Typography sx={{ fontStyle: "italic" }}>
+                <Box flexGrow={5}></Box>
+                <Typography sx={{ fontSize: 14 }}>
                   Imdb ID: {movie.imdbID}
                 </Typography>
               </CardContent>
