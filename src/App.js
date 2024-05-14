@@ -13,44 +13,47 @@ import { useEffect, useState } from "react";
 import { deepPurple, indigo } from "@mui/material/colors";
 import MovieIcon from "@mui/icons-material/Movie";
 import SearchIcon from "@mui/icons-material/Search";
-
-import InputLabel from "@mui/material/InputLabel";
-
-import FormControl from "@mui/material/FormControl";
 import MovieCard from "./components/MovieCard";
 
 function App() {
   const [type, setType] = useState("All");
+  const [year, setYear] = useState("All");
   const [searchText, setSearchText] = useState("Pokemon");
   const [searchTextChange, setSearchTextChange] = useState("Pokemon");
   const [movies, setMovies] = useState([]);
+  const years = [];
+  for (let year = 1920; year <= 2024; year++) {
+    years.push(year);
+  }
 
   const getMovies = async (searchText, type) => {
+    var urltext = searchText;
     if (type !== "All") {
-      const url = `http://www.omdbapi.com/?s=${searchText}&type=${type}&apikey=7338b124`;
-      const response = await fetch(url);
-      const responseJson = await response.json();
-
-      if (responseJson.Search) {
-        setMovies(responseJson.Search);
-      }
-      console.log(responseJson);
-    } else {
-      const url = `http://www.omdbapi.com/?s=${searchText}&apikey=7338b124`;
-      const response = await fetch(url);
-
-      const responseJson = await response.json();
-
-      if (responseJson.Search) {
-        setMovies(responseJson.Search);
-      }
-      console.log(responseJson);
+      urltext = urltext + "&type=" + type;
     }
+    if (year !== "All") {
+      urltext = urltext + "&y=" + year;
+    }
+
+    const url = `http://www.omdbapi.com/?s=${urltext}&apikey=7338b124`;
+    const response = await fetch(url);
+
+    const responseJson = await response.json();
+
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    }
+    console.log(responseJson);
   };
 
   useEffect(() => {
     getMovies(searchText, type);
   }, [searchText, type]);
+
+  const handleChangeYear = (event) => {
+    setYear(event.target.value);
+    console.log(event.target.value);
+  };
 
   const handleChangeType = (event) => {
     setType(event.target.value);
@@ -81,11 +84,24 @@ function App() {
             <Select
               variant="standard"
               sx={{ mb: 0, mr: 1 }}
+              value={year}
+              label={year}
+              onChange={handleChangeYear}
+            >
+              <MenuItem value={"All"}>All Years</MenuItem>
+              {years.map((year) => (
+                <MenuItem value={year}>{year}</MenuItem>
+              ))}
+            </Select>
+
+            <Select
+              variant="standard"
+              sx={{ mb: 0, mr: 1 }}
               value={type}
               label={type}
               onChange={handleChangeType}
             >
-              <MenuItem value={"All"}>All</MenuItem>
+              <MenuItem value={"All"}>All Types</MenuItem>
               <MenuItem value={"movie"}>Movies</MenuItem>
               <MenuItem value={"series"}>TV Series</MenuItem>
               <MenuItem value={"episode"}>TV Series Episodes</MenuItem>
