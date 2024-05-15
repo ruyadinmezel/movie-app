@@ -6,45 +6,79 @@ import {
   Grid,
   Pagination,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React from "react";
 import { Router, useRoutes } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const MovieCard = (props) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleMovieClick = (imdbID) => {
     console.log("Clicked IMDb ID:", imdbID);
   };
   return (
     <div>
-      <Grid container spacing={3} margin={3} ml={10}>
+      <Grid
+        container
+        spacing={3}
+        margin={isSmallScreen ? 1 : 3}
+        ml={isSmallScreen ? 1 : 5}
+        sx={{ maxWidth: "100%" }}
+      >
         {props.movies.map((movie, index) => (
-          <Grid item key={movie.imdbID} sx={{ width: "17%" }}>
+          <Grid
+            item
+            key={movie.imdbID}
+            xs={10}
+            sm={5}
+            md={3.5}
+            lg={2.2}
+            xl={2.2}
+          >
             <Link
               to={`/MovieDetails/${movie.imdbID}`} // Pass IMDb ID as URL parameter
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Card sx={{ height: 530 }}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 {movie.Poster !== "N/A" ? (
                   <CardMedia
                     component="img"
                     image={movie.Poster}
                     alt={movie.Title}
-                    sx={{ height: "65%" }}
+                    sx={{ height: isSmallScreen ? "200px" : "65%" }}
                   />
                 ) : (
-                  <Box sx={{ height: "65%" }}></Box>
+                  <Box sx={{ height: isSmallScreen ? "200px" : "65%" }}></Box>
                 )}
-                <CardContent sx={{ height: "35%", m: 1 }}>
+                <CardContent sx={{ flex: 1, m: 1 }}>
                   {/* //sx={{ fontFamily: "roboto" }} */}
-                  <Typography sx={{ fontWeight: "bold", fontSize: 16 }}>
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      fontSize: isSmallScreen ? 14 : 16,
+                    }}
+                  >
                     {movie.Title}
                   </Typography>
-                  <Typography sx={{ fontStyle: "italic", fontSize: 16 }}>
+                  <Typography
+                    sx={{
+                      fontStyle: "italic",
+                      fontSize: isSmallScreen ? 12 : 14,
+                    }}
+                  >
                     {movie.Year}
                   </Typography>
                   <Box flexGrow={5}></Box>
-                  <Typography sx={{ fontSize: 14 }}>
+                  <Typography sx={{ fontSize: isSmallScreen ? 10 : 12 }}>
                     Imdb ID: {movie.imdbID}
                   </Typography>
                 </CardContent>

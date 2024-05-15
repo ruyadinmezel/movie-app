@@ -8,6 +8,8 @@ import {
   Grid,
   Divider,
   Stack,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -20,18 +22,17 @@ import popcornIcon from "./popcorn.svg";
 
 const MovieDetailsPage = () => {
   const { imdbID } = useParams();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [movieDetails, setMovieDetails] = useState([]);
-  //console.log(imdbID);
 
   useEffect(() => {
     getMovieDetails();
-    console.log(movieDetails);
   }, [imdbID]);
 
   const getMovieDetails = async () => {
     const url = `https://www.omdbapi.com/?i=${imdbID}&apikey=7338b124`;
     const response = await fetch(url);
-
     const responseJson = await response.json();
 
     if (responseJson) {
@@ -58,9 +59,9 @@ const MovieDetailsPage = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <Grid container>
-        <Grid item xs={4.5}>
-          <Card raised="true" sx={{ m: 5 }}>
+      <Grid container spacing={isSmallScreen ? 2 : 4}>
+        <Grid item xs={12} sm={12} md={6} lg={5} xl={4.5}>
+          <Card raised="true" sx={{ m: isSmallScreen ? 2 : 5 }}>
             {movieDetails.Poster !== "N/A" ? (
               <CardMedia
                 component="img"
@@ -72,33 +73,45 @@ const MovieDetailsPage = () => {
             )}
           </Card>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
           <Typography
             sx={{
               fontFamily: "Monospace",
               fontWeight: "bold",
-              fontSize: 40,
-              ml: 5,
-              mt: 5,
+              fontSize: isSmallScreen ? 30 : 40,
+              ml: isSmallScreen ? 2 : 5,
+              mt: isSmallScreen ? 2 : 5,
             }}
           >
             {movieDetails.Title}
           </Typography>
-          <Grid container sx={{ ml: 5 }}>
+          <Grid container sx={{ ml: isSmallScreen ? 2 : 5 }}>
             <Typography
-              sx={{ fontFamily: "Monospace", fontSize: 20, color: grey[600] }}
+              sx={{
+                fontFamily: "Monospace",
+                fontSize: isSmallScreen ? 16 : 20,
+                color: grey[600],
+              }}
             >
               {movieDetails.Year} |
             </Typography>
 
             <Typography
-              sx={{ fontFamily: "Monospace", fontSize: 20, color: grey[600] }}
+              sx={{
+                fontFamily: "Monospace",
+                fontSize: isSmallScreen ? 16 : 20,
+                color: grey[600],
+              }}
             >
               {movieDetails.Runtime} |
             </Typography>
 
             <Typography
-              sx={{ fontFamily: "Monospace", fontSize: 20, color: grey[600] }}
+              sx={{
+                fontFamily: "Monospace",
+                fontSize: isSmallScreen ? 16 : 20,
+                color: grey[600],
+              }}
             >
               {" "}
               {movieDetails.Genre}
@@ -108,22 +121,21 @@ const MovieDetailsPage = () => {
           <Typography
             sx={{
               fontFamily: "Monospace",
-
-              fontSize: 20,
-              ml: 5,
-              mt: 5,
-              mb: 5,
+              fontSize: isSmallScreen ? 16 : 20,
+              ml: isSmallScreen ? 2 : 5,
+              mt: isSmallScreen ? 2 : 5,
+              mb: isSmallScreen ? 2 : 5,
             }}
           >
             {movieDetails.Plot}
           </Typography>
 
-          <Grid container sx={{ ml: 5 }}>
+          <Grid container sx={{ ml: isSmallScreen ? 2 : 5 }}>
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
-                mr: 5,
+                fontSize: isSmallScreen ? 16 : 20,
+                mr: 4,
                 color: grey[600],
               }}
             >
@@ -132,18 +144,18 @@ const MovieDetailsPage = () => {
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
+                fontSize: isSmallScreen ? 16 : 20,
               }}
             >
               {movieDetails.Actors}
             </Typography>
           </Grid>
 
-          <Grid container sx={{ ml: 5 }}>
+          <Grid container sx={{ ml: isSmallScreen ? 2 : 5 }}>
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
+                fontSize: isSmallScreen ? 16 : 20,
                 mr: 4,
                 color: grey[600],
               }}
@@ -153,19 +165,19 @@ const MovieDetailsPage = () => {
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
+                fontSize: isSmallScreen ? 16 : 20,
               }}
             >
               {movieDetails.Director}
             </Typography>
           </Grid>
 
-          <Grid container sx={{ ml: 5 }}>
+          <Grid container sx={{ ml: isSmallScreen ? 2 : 5 }}>
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
-                mr: 7,
+                fontSize: isSmallScreen ? 16 : 20,
+                mr: 4,
                 color: grey[600],
               }}
             >
@@ -174,19 +186,19 @@ const MovieDetailsPage = () => {
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
+                fontSize: isSmallScreen ? 16 : 20,
               }}
             >
               {movieDetails.Writer}
             </Typography>
           </Grid>
 
-          <Grid container sx={{ ml: 5 }}>
+          <Grid container sx={{ ml: isSmallScreen ? 2 : 5 }}>
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
-                mr: 5,
+                fontSize: isSmallScreen ? 16 : 20,
+                mr: 4,
                 color: grey[600],
               }}
             >
@@ -195,17 +207,21 @@ const MovieDetailsPage = () => {
             <Typography
               sx={{
                 fontFamily: "Monospace",
-                fontSize: 20,
+                fontSize: isSmallScreen ? 16 : 20,
               }}
             >
               {movieDetails.Language}
             </Typography>
           </Grid>
 
-          <Divider sx={{ my: 7 }}></Divider>
+          <Divider sx={{ my: isSmallScreen ? 3 : 7 }}></Divider>
 
-          <Stack direction="row">
-            <Grid container sx={{ ml: 20 }}>
+          <Stack
+            direction={isSmallScreen ? "column" : "row"}
+            spacing={isSmallScreen ? 2 : 5}
+            ml={isSmallScreen ? 5 : 10}
+          >
+            <Grid container>
               <Box sx={{ height: 30, width: 30, mr: 2, mt: 2 }}>
                 <img src={starIcon}></img>
               </Box>
@@ -213,7 +229,7 @@ const MovieDetailsPage = () => {
                 <Typography
                   sx={{
                     fontFamily: "Monospace",
-                    fontSize: 20,
+                    fontSize: isSmallScreen ? 16 : 20,
                     mr: 5,
                   }}
                 >
@@ -223,7 +239,7 @@ const MovieDetailsPage = () => {
                 <Typography
                   sx={{
                     fontFamily: "Monospace",
-                    fontSize: 15,
+                    fontSize: isSmallScreen ? 14 : 15,
                     color: grey[600],
                   }}
                 >
@@ -232,7 +248,7 @@ const MovieDetailsPage = () => {
               </Grid>
             </Grid>
 
-            <Grid container sx={{ ml: 5 }}>
+            <Grid container>
               <Box sx={{ height: 30, width: 30, mr: 2, mt: 2 }}>
                 <img src={popcornIcon} height={30}></img>
               </Box>
@@ -240,7 +256,7 @@ const MovieDetailsPage = () => {
                 <Typography
                   sx={{
                     fontFamily: "Monospace",
-                    fontSize: 20,
+                    fontSize: isSmallScreen ? 16 : 20,
                     mr: 5,
                   }}
                 >
@@ -250,7 +266,7 @@ const MovieDetailsPage = () => {
                 <Typography
                   sx={{
                     fontFamily: "Monospace",
-                    fontSize: 15,
+                    fontSize: isSmallScreen ? 14 : 15,
                     color: grey[600],
                   }}
                 >

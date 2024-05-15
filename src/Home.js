@@ -87,14 +87,14 @@ function Home() {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, width: "15%" }}
+              sx={{ flexGrow: 1, minWidth: "100px" }}
             >
               MovieHub
             </Typography>
 
             <Select
               variant="standard"
-              sx={{ mb: 0, mr: 1, width: "7%" }}
+              sx={{ mb: 0, mr: 1, minWidth: "80px" }}
               value={year}
               label={year}
               onChange={handleChangeYear}
@@ -111,7 +111,7 @@ function Home() {
 
             <Select
               variant="standard"
-              sx={{ mb: 0, mr: 1, width: "9%" }}
+              sx={{ mb: 0, mr: 1, minWidth: "150px" }}
               value={type}
               label={type}
               onChange={handleChangeType}
@@ -134,7 +134,7 @@ function Home() {
               label="Search"
               variant="standard"
               value={searchTextChange}
-              sx={{ ml: 1, mb: 2, width: "12%" }}
+              sx={{ ml: 1, mb: 2, minWidth: "150px" }}
               onChange={handleChangeSearchText}
             />
             <Button sx={{ m: 1, width: "2%" }} onClick={handleSearchButton}>
@@ -143,13 +143,17 @@ function Home() {
           </Toolbar>
         </AppBar>
       </Box>
-      <MovieCard movies={movies}></MovieCard>
+      <MovieCard
+        sx={{ mt: 2, mx: "auto", maxWidth: "800px" }}
+        movies={movies}
+      ></MovieCard>
       <Box
         sx={{ mb: 5, mr: 8 }}
         style={{
           display: "flex",
           justifyContent: "center", // Center horizontally
-          alignItems: "flex-end", // Center vertically
+          alignItems: "flex-end",
+          textAlign: "center", // Center vertically
         }}
       >
         <Pagination
