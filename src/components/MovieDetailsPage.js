@@ -52,7 +52,7 @@ const MovieDetailsPage = () => {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, width: "15%", fontFamily: "Monospace" }}
+              sx={{ flexGrow: 1, width: "15%" }}
             >
               MovieHub
             </Typography>
@@ -61,7 +61,7 @@ const MovieDetailsPage = () => {
       </Box>
       <Grid container spacing={isSmallScreen ? 2 : 4}>
         <Grid item xs={12} sm={12} md={6} lg={5} xl={4.5}>
-          <Card raised="true" sx={{ m: isSmallScreen ? 2 : 5 }}>
+          <Card raised={true} sx={{ m: isSmallScreen ? 2 : 5 }}>
             {movieDetails.Poster !== "N/A" ? (
               <CardMedia
                 component="img"

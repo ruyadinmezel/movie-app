@@ -46,7 +46,7 @@ function Home() {
     if (responseJson.Search) {
       setMovies(responseJson.Search);
     }
-    console.log(responseJson);
+    //console.log(responseJson);
   };
 
   useEffect(() => {
@@ -55,21 +55,21 @@ function Home() {
 
   const handleChangeYear = (event) => {
     setYear(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   const handleChangeType = (event) => {
     setType(event.target.value);
-    console.log(event.target.value);
+    //console.log(event.target.value);
   };
   const handleChangeSearchText = (event) => {
     setSearchTextChange(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
   const handleSearchButton = (event) => {
     setSearchText(searchTextChange);
 
-    console.log(event.target.value);
+    //.log(event.target.value);
     getMovies(searchText, type);
   };
 
