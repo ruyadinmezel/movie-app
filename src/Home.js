@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   MenuItem,
+  Pagination,
   Select,
   TextField,
   Toolbar,
@@ -22,12 +23,13 @@ function Home() {
   const [searchText, setSearchText] = useState("Pokemon");
   const [searchTextChange, setSearchTextChange] = useState("Pokemon");
   const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const years = [];
   for (let year = 2024; year >= 1920; year--) {
     years.push(year);
   }
 
-  const getMovies = async (searchText, type, year) => {
+  const getMovies = async (searchText, type, year, currentPage) => {
     var urltext = searchText;
     if (type !== "All") {
       urltext = urltext + "&type=" + type;
@@ -36,7 +38,7 @@ function Home() {
       urltext = urltext + "&y=" + year;
     }
 
-    const url = `https://www.omdbapi.com/?s=${urltext}&apikey=7338b124`;
+    const url = `https://www.omdbapi.com/?s=${urltext}&page=${currentPage}&apikey=7338b124`;
     const response = await fetch(url);
 
     const responseJson = await response.json();
@@ -48,8 +50,8 @@ function Home() {
   };
 
   useEffect(() => {
-    getMovies(searchText, type, year);
-  }, [searchText, type, year]);
+    getMovies(searchText, type, year, currentPage);
+  }, [searchText, type, year, currentPage]);
 
   const handleChangeYear = (event) => {
     setYear(event.target.value);
@@ -69,6 +71,10 @@ function Home() {
 
     console.log(event.target.value);
     getMovies(searchText, type);
+  };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
   };
 
   return (
@@ -138,6 +144,16 @@ function Home() {
         </AppBar>
       </Box>
       <MovieCard movies={movies}></MovieCard>
+      <Box
+        sx={{ mb: 5, mr: 8 }}
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
+        }}
+      >
+        <Pagination count={10} page={currentPage} onChange={handlePageChange} />
+      </Box>
     </div>
   );
 }

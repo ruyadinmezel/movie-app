@@ -4,6 +4,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Pagination,
   Typography,
 } from "@mui/material";
 import React from "react";
