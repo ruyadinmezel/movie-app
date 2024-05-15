@@ -30,7 +30,7 @@ const MovieCard = (props) => {
                   alt="poster"
                   sx={{ height: "75%" }}
                 />
-                <CardContent sx={{ height: "25%", m: 1 }}>
+                <CardContent sx={{ height: "30%", m: 1 }}>
                   {/* //sx={{ fontFamily: "roboto" }} */}
                   <Typography sx={{ fontWeight: "bold", fontSize: 16 }}>
                     {movie.Title}
