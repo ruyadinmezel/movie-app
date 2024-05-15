@@ -152,7 +152,11 @@ function Home() {
           alignItems: "flex-end", // Center vertically
         }}
       >
-        <Pagination count={10} page={currentPage} onChange={handlePageChange} />
+        <Pagination
+          count={100}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
       </Box>
     </div>
   );
