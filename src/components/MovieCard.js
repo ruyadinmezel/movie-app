@@ -28,7 +28,7 @@ const MovieCard = (props) => {
                   component="img"
                   image={movie.Poster}
                   alt="poster"
-                  sx={{ height: "70%" }}
+                  sx={{ height: "65%" }}
                 />
                 <CardContent sx={{ height: "35%", m: 1 }}>
                   {/* //sx={{ fontFamily: "roboto" }} */}
