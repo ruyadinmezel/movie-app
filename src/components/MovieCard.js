@@ -18,7 +18,7 @@ const MovieCard = (props) => {
     <div>
       <Grid container spacing={3} margin={5} ml={10}>
         {props.movies.map((movie, index) => (
-          <Grid item sx={{ width: "17%" }}>
+          <Grid item key={movie.imdbID} sx={{ width: "17%" }}>
             <Link
               to={`/MovieDetails/${movie.imdbID}`} // Pass IMDb ID as URL parameter
               style={{ textDecoration: "none", color: "inherit" }}

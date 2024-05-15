@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client"; // Import createRoot from react-dom
 
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
@@ -42,7 +42,8 @@ const darkTheme = createTheme({
   },
 });
 
-ReactDOM.render(
+// Use createRoot instead of ReactDOM.render
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -50,6 +51,5 @@ ReactDOM.render(
         <App />
       </Router>
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

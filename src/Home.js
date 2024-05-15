@@ -93,9 +93,13 @@ function Home() {
               label={year}
               onChange={handleChangeYear}
             >
-              <MenuItem value={"All"}>All Years</MenuItem>
+              <MenuItem key="All" value={"All"}>
+                All Years
+              </MenuItem>
               {years.map((year) => (
-                <MenuItem value={year}>{year}</MenuItem>
+                <MenuItem key={year} value={year}>
+                  {year}
+                </MenuItem>
               ))}
             </Select>
 
@@ -106,10 +110,18 @@ function Home() {
               label={type}
               onChange={handleChangeType}
             >
-              <MenuItem value={"All"}>All Types</MenuItem>
-              <MenuItem value={"movie"}>Movies</MenuItem>
-              <MenuItem value={"series"}>TV Series</MenuItem>
-              <MenuItem value={"episode"}>TV Series Episodes</MenuItem>
+              <MenuItem key="All" value={"All"}>
+                All Types
+              </MenuItem>
+              <MenuItem key="movie" value={"movie"}>
+                Movies
+              </MenuItem>
+              <MenuItem key="series" value={"series"}>
+                TV Series
+              </MenuItem>
+              <MenuItem key="episode" value={"episode"}>
+                TV Series Episodes
+              </MenuItem>
             </Select>
 
             <TextField
