@@ -61,11 +61,15 @@ const MovieDetailsPage = () => {
       <Grid container>
         <Grid item xs={4.5}>
           <Card raised="true" sx={{ m: 5 }}>
-            <CardMedia
-              component="img"
-              image={movieDetails.Poster}
-              alt="poster"
-            />
+            {movieDetails.Poster !== "N/A" ? (
+              <CardMedia
+                component="img"
+                image={movieDetails.Poster}
+                alt={movieDetails.Title}
+              />
+            ) : (
+              <Box></Box>
+            )}
           </Card>
         </Grid>
         <Grid item xs={7}>

@@ -25,12 +25,16 @@ const MovieCard = (props) => {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <Card sx={{ height: 530 }}>
-                <CardMedia
-                  component="img"
-                  image={movie.Poster}
-                  alt="poster"
-                  sx={{ height: "65%" }}
-                />
+                {movie.Poster !== "N/A" ? (
+                  <CardMedia
+                    component="img"
+                    image={movie.Poster}
+                    alt={movie.Title}
+                    sx={{ height: "65%" }}
+                  />
+                ) : (
+                  <Box sx={{ height: "65%" }}></Box>
+                )}
                 <CardContent sx={{ height: "35%", m: 1 }}>
                   {/* //sx={{ fontFamily: "roboto" }} */}
                   <Typography sx={{ fontWeight: "bold", fontSize: 16 }}>
