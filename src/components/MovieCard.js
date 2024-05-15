@@ -16,7 +16,7 @@ const MovieCard = (props) => {
   };
   return (
     <div>
-      <Grid container spacing={3} margin={5} ml={10}>
+      <Grid container spacing={3} margin={3} ml={10}>
         {props.movies.map((movie, index) => (
           <Grid item key={movie.imdbID} sx={{ width: "17%" }}>
             <Link
@@ -28,9 +28,9 @@ const MovieCard = (props) => {
                   component="img"
                   image={movie.Poster}
                   alt="poster"
-                  sx={{ height: "75%" }}
+                  sx={{ height: "70%" }}
                 />
-                <CardContent sx={{ height: "30%", m: 1 }}>
+                <CardContent sx={{ height: "35%", m: 1 }}>
                   {/* //sx={{ fontFamily: "roboto" }} */}
                   <Typography sx={{ fontWeight: "bold", fontSize: 16 }}>
                     {movie.Title}
