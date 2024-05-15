@@ -149,7 +149,7 @@ function Home() {
         style={{
           display: "flex",
           justifyContent: "center", // Center horizontally
-          alignItems: "center", // Center vertically
+          alignItems: "flex-end", // Center vertically
         }}
       >
         <Pagination count={10} page={currentPage} onChange={handlePageChange} />
