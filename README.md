@@ -2,7 +2,7 @@
 
 ## Deploy Your Own
 
-This project has been deployed with Vercel. You can visit the website through this link: https://movie-9lq3dgh7c-ruyadinmezels-projects.vercel.app/
+This project has been deployed with Vercel. You can visit the website through this link: https://movie-lxw5k8ljx-ruyadinmezels-projects.vercel.app/
 
 
 ## Available Scripts
